@@ -1,4 +1,4 @@
-Nandpackage com.androidapp.todo
+package com.androidapp.todo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
