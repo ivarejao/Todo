@@ -61,6 +61,7 @@ class TaskAdapter(var context: Context, var itens : ArrayList<Task>) : RecyclerV
         return itens.size
     }
 
+    // Exclusão visual da tela.
     fun deleteTask(){
         itens.remove(task)
         this.notifyItemRemoved(selectedPosition)
