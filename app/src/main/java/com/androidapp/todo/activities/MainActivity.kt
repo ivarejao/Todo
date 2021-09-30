@@ -1,4 +1,4 @@
-package com.androidapp.todo
+package com.androidapp.todo.activities
 
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var date : String? = null
 
-    var cal = Calendar.getInstance()
+    var cal:Calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Inicializa a tela principal da aplicação.
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         db = Room.databaseBuilder(applicationContext, TaskDatabase::class.java, "TaskList").build()
 
         // Cria o evento de seleção da data.
-        var dateSetListener = object : DatePickerDialog.OnDateSetListener{
+        val dateSetListener = object : DatePickerDialog.OnDateSetListener{
             override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
                 cal.set(Calendar.YEAR, year)
                 cal.set(Calendar.MONTH, month)
@@ -88,19 +88,18 @@ class MainActivity : AppCompatActivity() {
                         sync
                     )
 
-                    Thread(Runnable {
+                    Thread{
                         db.TaskDao().insertTasks(task)
-                        runOnUiThread(Runnable {
-                            val str:String = ""
+                        runOnUiThread {
+                            val str = ""
                             binding.title.text = createEditable(str)
                             binding.subtitle.text = createEditable(str)
                             binding.text.text = createEditable(str)
                             date = null
-                            if(sync)
+                            if (sync)
                                 binding.checkBox.toggle()
-                            }
-                        )
-                    }).start()
+                        }
+                    }.start()
                 }
             }
         }
