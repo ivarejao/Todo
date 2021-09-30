@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Insira o titulo"
+                android:hint="@string/insira_o_titulo"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -38,21 +38,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Insira o subtitulo"
+                android:hint="@string/insira_o_subtitulo"
                 android:inputType="textPersonName" />
 
-            <TextView
+            <EditText
                 android:id="@+id/text"
                 android:layout_width="match_parent"
-                android:layout_height="95dp"
-                android:hint="Insira o texto"
+                android:layout_height="140dp"
+                android:ems="10"
+                android:hint="@string/insira_o_texto"
                 android:inputType="textMultiLine" />
 
             <Button
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="data" />
+                android:hint="@string/data"
+                android:textColorHint="#FFFFFF" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,14 +66,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="editar" />
+                    android:text="@string/editar" />
 
                 <Button
                     android:id="@+id/cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="cancelar" />
+                    android:text="@string/cancelar"
+                    android:textColorHint="#FFFFFF" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

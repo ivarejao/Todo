@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">To do</string>
+    <string name="insira_o_titulo">Insira o título</string>
+    <string name="insira_o_subtitulo">Insira o subtitulo</string>
+    <string name="insira_o_texto">Insira o texto</string>
+    <string name="data">DATA</string>
+    <string name="sincronizar">sincronizar</string>
+    <string name="cadastrar">CADASTRAR</string>
+    <string name="listar">LISTAR</string>
+    <string name="editar">editar</string>
+    <string name="cancelar">cancelar</string>
 </resources>
