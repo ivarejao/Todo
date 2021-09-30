@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var db : TaskDatabase
     private lateinit var binding: ActivityMainBinding
-    private var date : String = ""
 
     var cal:Calendar = Calendar.getInstance()
+    private var date : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Inicializa a tela principal da aplicação.
