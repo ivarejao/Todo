@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.androidapp.todo.entities.Task
 import java.text.SimpleDateFormat
+import kotlin.collections.ArrayList
 
 class TaskAdapter(var context: Context, var itens : ArrayList<Task>) : RecyclerView.Adapter<TaskViewHolder>() {
 
@@ -36,7 +37,7 @@ class TaskAdapter(var context: Context, var itens : ArrayList<Task>) : RecyclerV
             task = itens.get(viewHolder.bindingAdapterPosition)
             //selectedPosition = viewHolder.adapterPosition
             selectedPosition = viewHolder.bindingAdapterPosition
-            Toast.makeText(context, "Tarefa clicada " + task.title, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Segure para abrir o menu de opções!", Toast.LENGTH_LONG).show()
         }
 
         viewHolder.itemView.setOnCreateContextMenuListener(object : View.OnCreateContextMenuListener{
@@ -46,8 +47,9 @@ class TaskAdapter(var context: Context, var itens : ArrayList<Task>) : RecyclerV
                 menuInfo: ContextMenu.ContextMenuInfo?
             ) {
                 menu!!.setHeaderTitle("Ações: ")
-                menu!!.add(0, 0, 0, "Editar")
-                menu!!.add(0, 1, 1, "Deletar")
+                menu!!.add(0, 0, 0, "Visualizar")
+                menu!!.add(0, 1, 1, "Editar")
+                menu!!.add(0, 2, 2, "Deletar")
 
                 //task = itens.get(viewHolder.adapterPosition)
                 task = itens.get(viewHolder.bindingAdapterPosition)

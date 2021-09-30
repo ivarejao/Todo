@@ -16,7 +16,6 @@ import com.androidapp.todo.database.TaskDatabase
 import com.androidapp.todo.databinding.ActivityListBinding
 import com.androidapp.todo.entities.Task
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textview.MaterialTextView
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -69,12 +68,17 @@ class List : AppCompatActivity() {
         val adapter = bindingList.recycler.adapter as TaskAdapter
         task = adapter.task
 
-        if (item!!.itemId == 0){
-            displayDialog()
-        }
-        else if (item!!.itemId == 1){
-            adapter.deleteTask()
-            deleteTask(task)
+        when (item!!.itemId) {
+            0 -> {
+                displayDialog()
+            }
+            1 -> {
+                displayEditDialog()
+            }
+            2 -> {
+                adapter.deleteTask()
+                deleteTask(task)
+            }
         }
 
         return super.onContextItemSelected(item)
@@ -99,7 +103,7 @@ class List : AppCompatActivity() {
         }, 5000)
     }
 
-    private fun displayDialog(){
+    private fun displayEditDialog(){
         // Cria o dialog a ser exibido
         val dialog = Dialog(this)
         dialog.setTitle("Editar")
@@ -127,7 +131,6 @@ class List : AppCompatActivity() {
 
                 date = formatador.format(cal.time)
             }
-
         }
 
         dateButton.setOnClickListener{
@@ -145,7 +148,6 @@ class List : AppCompatActivity() {
 
         //
         edit.setOnClickListener(View.OnClickListener {
-
             when {
                 title.text.toString().trim().isEmpty() -> {
                     Toast.makeText(this, "Título da tarefa não pode estar em branco!", Toast.LENGTH_SHORT).show()
@@ -173,14 +175,35 @@ class List : AppCompatActivity() {
                     updateTask(task)
                     dialog.dismiss()
                 }
-
             }
-
         })
 
         cancel.setOnClickListener{
             dialog.dismiss()
         }
+
+        dialog.show()
+    }
+
+    private fun displayDialog() {
+        // Cria o dialog a ser exibido
+        val dialog = Dialog(this)
+        dialog.setTitle("Editar")
+        dialog.setContentView(R.layout.task)
+        dialog.setCancelable(true)
+
+        // Recupera os elementos do dialog
+        val vTitle: TextView = dialog.findViewById(R.id.title) as TextView
+        val vSubtitle: TextView = dialog.findViewById(R.id.subtitle) as TextView
+        val vText: TextView = dialog.findViewById(R.id.text) as TextView
+        val vDate: TextView = dialog.findViewById(R.id.date) as TextView
+
+        val formatador = SimpleDateFormat("dd//MM/yyyy", Locale.ITALY)
+
+        ("Título: " + task.title).also { vTitle.text = it }
+        ("Subtítulo: " + task.subtitle).also { vSubtitle.text = it }
+        ("Texto: " + task.text).also { vText.text = it }
+        ("Data: " + formatador.format(task.date!!)).also { vDate.text = it }
 
         dialog.show()
     }
