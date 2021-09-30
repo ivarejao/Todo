@@ -1,6 +1,7 @@
 package com.androidapp.todo.activities
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -15,9 +16,9 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var db : TaskDatabase
+    lateinit var db : TaskDatabase
     private lateinit var binding: ActivityMainBinding
-    private var date : String? = null
+    private var date : String = ""
 
     var cal:Calendar = Calendar.getInstance()
 
@@ -72,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Texto da tarefa não pode estar em branco!", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                date.isNullOrEmpty() -> {
+                date.isEmpty() -> {
                     Toast.makeText(this, "Selecione uma data para a tarefa.", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
@@ -95,13 +96,18 @@ class MainActivity : AppCompatActivity() {
                             binding.title.text = createEditable(str)
                             binding.subtitle.text = createEditable(str)
                             binding.text.text = createEditable(str)
-                            date = null
+                            date = ""
                             if (sync)
                                 binding.checkBox.toggle()
                         }
                     }.start()
                 }
             }
+        }
+
+        binding.list.setOnClickListener{
+            val intent = Intent(applicationContext, List::class.java)
+            startActivity(intent)
         }
     }
 
