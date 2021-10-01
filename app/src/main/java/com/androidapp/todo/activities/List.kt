@@ -120,7 +120,8 @@ class List : AppCompatActivity() {
         // Cria o dialog a ser exibido para a tela de edição.
         val dialog = Dialog(this)
         dialog.setTitle("Editar")
-        dialog.setContentView(R.layout.edit)
+        dialog.setContentView(R.layout.activity_main)
+//        dialog.setContentView(R.layout.edit)
         dialog.setCancelable(true)
 
         // Recupera os elementos do dialog
@@ -129,10 +130,11 @@ class List : AppCompatActivity() {
         text = dialog.findViewById(R.id.text) as EditText
         dateButton = dialog.findViewById(R.id.date) as Button
 
-        edit = dialog.findViewById(R.id.edit) as Button
+        edit = dialog.findViewById(R.id.register) as Button
+//        edit = dialog.findViewById(R.id.edit) as Button
         cancel = dialog.findViewById(R.id.cancel) as Button
 
-        val formatador = SimpleDateFormat("dd//MM/yyyy", Locale.ITALY)
+        val formatador = SimpleDateFormat("dd/MM/yyyy", Locale.ITALY)
 
         // Preenchendo a tela com o que tinha no banco de dados para aquela tarefa
         title.setText(task.title)

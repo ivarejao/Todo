@@ -9,4 +9,9 @@
     <string name="listar">LISTAR</string>
     <string name="editar">editar</string>
     <string name="cancelar">cancelar</string>
+    <string name="my_tasks">My Tasks</string>
+    <string name="search_tasks">Search tasks</string>
+    <string name="task_subtitle">Task Subtitle</string>
+    <string name="type_note_here">Type note here</string>
+    <string name="task_title">Task Title</string>
 </resources>

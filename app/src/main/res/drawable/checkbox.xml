@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/background_checkbox"
+        android:height="@dimen/_24sdp"
+        android:width="@dimen/_24sdp"
+        />
+    <item android:drawable="@drawable/ic_google_black"
+        android:height="@dimen/_10sdp"
+        android:width="@dimen/_10sdp"
+        android:gravity="center"
+        android:id="@+id/googlelogo"/>
+</layer-list>
