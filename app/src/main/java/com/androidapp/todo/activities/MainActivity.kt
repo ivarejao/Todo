@@ -88,18 +88,11 @@ class MainActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
                 else -> {
-                    // Caso as variáveis estejam todas preenchidas, executa este código
+                    // Caso as variáveis estejam todas preenchidas, executa este código.
                     val format = SimpleDateFormat("dd//MM/yyyy")
 
                     // Cria uma instancia da classe tarefa.
-                    val task = Task(
-                        0,
-                        title,
-                        subtitle,
-                        text,
-                        format.parse(date),
-                        sync
-                    )
+                    val task = Task(0, title, subtitle, text, format.parse(date), sync)
 
                     // Insere o objeto no banco de dados e limpa a tela.
                     // Dentro de uma thread para não atrapalhar o usuário.
@@ -123,7 +116,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Criando o handler para quando o botão 'LISTAR' for clicado
+        // Criando o handler para quando o botão 'LISTAR' for clicado.
         binding.list.setOnClickListener{
             // Muda a tela para a activity List
             val intent = Intent(applicationContext, List::class.java)

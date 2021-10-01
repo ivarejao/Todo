@@ -22,40 +22,49 @@ import kotlin.collections.ArrayList
 
 class List : AppCompatActivity() {
 
+    // Banco de dados da aplicação.
     lateinit var db : TaskDatabase
     private lateinit var bindingList: ActivityListBinding
 
-    lateinit var itens : ArrayList<Task>
+    private lateinit var itens : ArrayList<Task>
+
+    // Variáveis para fazer referência aos elementos da tela
     lateinit var title : EditText
     lateinit var subtitle : EditText
     lateinit var text : EditText
-    lateinit var dateButton : Button
+    private lateinit var dateButton : Button
 
-    lateinit var edit : Button
-    lateinit var cancel : Button
-    lateinit var task : Task
+    private lateinit var edit : Button
+    private lateinit var cancel : Button
+    private lateinit var task : Task
 
-    var cal:Calendar = Calendar.getInstance()
+    // Calendario como variável global.
+    private var cal:Calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Fazendo binding da tela para não ter que buscar os elementos da mesma toda hora.
         bindingList = ActivityListBinding.inflate(layoutInflater)
         val view = bindingList.root
         setContentView(view)
 
+        // Recupera o banco de dados.
         db = Room.databaseBuilder(applicationContext, TaskDatabase::class.java, "TaskList").build()
 
         consult()
     }
 
-    fun consult(){
+    // Obtem os elementos do banco de dados.
+    private fun consult(){
         Thread{
             itens = db.TaskDao().getAllTasks() as ArrayList<Task>
             fill()
             }.start()
     }
 
-    fun fill(){
+    // Preenche a tela com os elementos obtidos.
+    private fun fill(){
         runOnUiThread{
             val adapter = TaskAdapter(applicationContext, itens)
             bindingList.recycler.layoutManager = LinearLayoutManager(applicationContext)
@@ -64,11 +73,15 @@ class List : AppCompatActivity() {
         }
     }
 
+    // Função do menu de contexto.
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val adapter = bindingList.recycler.adapter as TaskAdapter
         task = adapter.task
 
-        when (item!!.itemId) {
+        // Caso 0 -> Visualizar
+        // Caso 1 -> Editar
+        // Caso 2 -> Deletar
+        when (item.itemId) {
             0 -> {
                 displayDialog()
             }
@@ -90,10 +103,10 @@ class List : AppCompatActivity() {
 
         // Se o usuário clicar em desfazer o timer é cancelado e é feita outra consulta ao banco de dados para popular a tela.
         val snackbar = Snackbar.make(bindingList.recycler, "Tarefa '" + task.title + "' excluida com sucesso", Snackbar.LENGTH_LONG)
-        snackbar.setAction("Desfazer", View.OnClickListener {
+        snackbar.setAction("Desfazer") {
             timer.cancel()
             consult()
-        }).show()
+        }.show()
 
         // Caso o timer não seja cancelado, ocorre a exclusão da tarefa no banco de dados.
         timer.schedule(object: TimerTask(){
@@ -104,7 +117,7 @@ class List : AppCompatActivity() {
     }
 
     private fun displayEditDialog(){
-        // Cria o dialog a ser exibido
+        // Cria o dialog a ser exibido para a tela de edição.
         val dialog = Dialog(this)
         dialog.setTitle("Editar")
         dialog.setContentView(R.layout.edit)
@@ -120,19 +133,24 @@ class List : AppCompatActivity() {
         cancel = dialog.findViewById(R.id.cancel) as Button
 
         val formatador = SimpleDateFormat("dd//MM/yyyy", Locale.ITALY)
-        var date : String = ""
+
+        // Preenchendo a tela com o que tinha no banco de dados para aquela tarefa
+        title.setText(task.title)
+        subtitle.setText(task.subtitle)
+        text.setText(task.text)
+        var date = formatador.format(task.date!!)
 
         // Cria o evento de seleção da data.
-        val dateSetListener = object : DatePickerDialog.OnDateSetListener{
-            override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        val dateSetListener =
+            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 cal.set(Calendar.YEAR, year)
                 cal.set(Calendar.MONTH, month)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
                 date = formatador.format(cal.time)
             }
-        }
 
+        // Criando o handler para quando o botão 'DATA' for clicado.
         dateButton.setOnClickListener{
             DatePickerDialog(this, dateSetListener,
                 cal.get(Calendar.YEAR),
@@ -140,14 +158,9 @@ class List : AppCompatActivity() {
                 cal.get(Calendar.DAY_OF_MONTH)).show()
         }
 
-        // Preenchendo a tela com o que tinha selecionado
-        title.setText(task.title)
-        subtitle.setText(task.subtitle)
-        text.setText(task.text)
-        date = formatador.format(task.date!!)
-
-        //
+        // Criando o handler para quando o botão 'EDITAR' for clicado.
         edit.setOnClickListener(View.OnClickListener {
+            // Tratamento das variáveis lidas.
             when {
                 title.text.toString().trim().isEmpty() -> {
                     Toast.makeText(this, "Título da tarefa não pode estar em branco!", Toast.LENGTH_SHORT).show()
@@ -166,19 +179,24 @@ class List : AppCompatActivity() {
                     return@OnClickListener
                 }
                 else -> {
+                    // Caso as variáveis estejam todas preenchidas, executa este código.
+                    // Atribui os valores lidos à tarefa.
                     task.title = title.text.toString()
                     task.subtitle = subtitle.text.toString()
                     task.text = text.text.toString()
                     task.date = formatador.parse(date)
                     task.sync = false
 
+                    // E atualiza a tarefa no banco de dados.
                     updateTask(task)
                     dialog.dismiss()
                 }
             }
         })
 
+        // Criando o handler para quando o botão 'CANCELAR' for clicado.
         cancel.setOnClickListener{
+            // Simplesmente fecha o dialog.
             dialog.dismiss()
         }
 
@@ -186,13 +204,15 @@ class List : AppCompatActivity() {
     }
 
     private fun displayDialog() {
-        // Cria o dialog a ser exibido
+        // Cria o dialog a ser exibido para a tela de visualização.
         val dialog = Dialog(this)
         dialog.setTitle("Editar")
         dialog.setContentView(R.layout.task)
         dialog.setCancelable(true)
 
-        // Recupera os elementos do dialog
+        // Recupera os elementos do dialog.
+        // Variáveis criadas localmente e não usasndo as que estavam la fora pois seus tipos na tela são diferentes.
+        // Essas variáveis não são possiveis de serem editadas pelo usuário.
         val vTitle: TextView = dialog.findViewById(R.id.title) as TextView
         val vSubtitle: TextView = dialog.findViewById(R.id.subtitle) as TextView
         val vText: TextView = dialog.findViewById(R.id.text) as TextView
@@ -200,6 +220,7 @@ class List : AppCompatActivity() {
 
         val formatador = SimpleDateFormat("dd//MM/yyyy", Locale.ITALY)
 
+        // Formatando os textos para mostrar ao usuário.
         ("Título: " + task.title).also { vTitle.text = it }
         ("Subtítulo: " + task.subtitle).also { vSubtitle.text = it }
         ("Texto: " + task.text).also { vText.text = it }
@@ -208,6 +229,7 @@ class List : AppCompatActivity() {
         dialog.show()
     }
 
+    // Função para atualizar uma dada tarefa no banco de dados.
     private fun updateTask(task: Task){
         Thread{
             db.TaskDao().updateTask(task)
