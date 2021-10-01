@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Criando o handler para quando o botão 'LISTAR' for clicado.
-        binding.list.setOnClickListener{
+        binding.back.setOnClickListener{
             // Muda a tela para a activity List
             val intent = Intent(applicationContext, List::class.java)
             startActivity(intent)

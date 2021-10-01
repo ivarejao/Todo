@@ -2,10 +2,13 @@ package com.androidapp.todo.activities
 
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import android.widget.*
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,8 +37,8 @@ class List : AppCompatActivity() {
     lateinit var text : EditText
     private lateinit var dateButton : Button
 
-    private lateinit var edit : Button
-    private lateinit var cancel : Button
+    private lateinit var register : Button
+    private lateinit var back : Button
     private lateinit var task : Task
 
     // Calendario como variável global.
@@ -51,7 +54,6 @@ class List : AppCompatActivity() {
 
         // Recupera o banco de dados.
         db = Room.databaseBuilder(applicationContext, TaskDatabase::class.java, "TaskList").build()
-
         consult()
     }
 
@@ -121,8 +123,12 @@ class List : AppCompatActivity() {
         val dialog = Dialog(this)
         dialog.setTitle("Editar")
         dialog.setContentView(R.layout.activity_main)
-//        dialog.setContentView(R.layout.edit)
+//        dialog.setContentView(R.layout.register)
         dialog.setCancelable(true)
+        var lp : WindowManager.LayoutParams = WindowManager.LayoutParams();
+        lp.copyFrom(dialog.window?.attributes);
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
 
         // Recupera os elementos do dialog
         title = dialog.findViewById(R.id.title) as EditText
@@ -130,9 +136,9 @@ class List : AppCompatActivity() {
         text = dialog.findViewById(R.id.text) as EditText
         dateButton = dialog.findViewById(R.id.date) as Button
 
-        edit = dialog.findViewById(R.id.register) as Button
-//        edit = dialog.findViewById(R.id.edit) as Button
-        cancel = dialog.findViewById(R.id.cancel) as Button
+        register = dialog.findViewById(R.id.register) as Button
+//        register = dialog.findViewById(R.id.register) as Button
+        back = dialog.findViewById(R.id.back) as Button
 
         val formatador = SimpleDateFormat("dd/MM/yyyy", Locale.ITALY)
 
@@ -161,7 +167,7 @@ class List : AppCompatActivity() {
         }
 
         // Criando o handler para quando o botão 'EDITAR' for clicado.
-        edit.setOnClickListener(View.OnClickListener {
+        register.setOnClickListener(View.OnClickListener {
             // Tratamento das variáveis lidas.
             when {
                 title.text.toString().trim().isEmpty() -> {
@@ -196,13 +202,17 @@ class List : AppCompatActivity() {
             }
         })
 
+        // Set dialog background as transparent
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+
         // Criando o handler para quando o botão 'CANCELAR' for clicado.
-        cancel.setOnClickListener{
+        back.setOnClickListener{
             // Simplesmente fecha o dialog.
             dialog.dismiss()
         }
 
         dialog.show()
+        dialog.window?.attributes = lp;
     }
 
     private fun displayDialog() {
@@ -220,13 +230,23 @@ class List : AppCompatActivity() {
         val vText: TextView = dialog.findViewById(R.id.text) as TextView
         val vDate: TextView = dialog.findViewById(R.id.date) as TextView
 
-        val formatador = SimpleDateFormat("dd//MM/yyyy", Locale.ITALY)
+        val formatador = SimpleDateFormat("dd/MM/yyyy", Locale.ITALY)
 
         // Formatando os textos para mostrar ao usuário.
-        ("Título: " + task.title).also { vTitle.text = it }
-        ("Subtítulo: " + task.subtitle).also { vSubtitle.text = it }
-        ("Texto: " + task.text).also { vText.text = it }
+        (task.title).also { vTitle.text = it }
+        (task.subtitle).also { vSubtitle.text = it }
+        (task.text).also { vText.text = it }
         ("Data: " + formatador.format(task.date!!)).also { vDate.text = it }
+
+        // Set dialog background as transparent
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+
+        // Set back button
+        back = dialog.findViewById(R.id.back) as Button
+        back.setOnClickListener{
+            // Simplesmente fecha o dialog.
+            dialog.dismiss()
+        }
 
         dialog.show()
     }

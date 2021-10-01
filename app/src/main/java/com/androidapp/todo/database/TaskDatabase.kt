@@ -1,6 +1,7 @@
 package com.androidapp.todo.database
 
 import androidx.room.Database
+import androidx.room.Entity
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.androidapp.todo.dao.TaskDao
