@@ -17,4 +17,8 @@
     <string name="taskcalendar">TaskCalendar</string>
     <string name="date">01/01/2001</string>
     <string name="subtitle_task">Subtitle task</string>
+    <string name="uppercase">Uppercase</string>
+    <string name="underlined">Underlined</string>
+    <string name="italic">Italic</string>
+    <string name="bold">Bold</string>
 </resources>

@@ -3,6 +3,7 @@ package com.androidapp.todo
 import android.view.ContextMenu
 import android.view.View
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 
 class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -11,7 +12,8 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     val title: TextView = itemView!!.findViewById(R.id.title)
     val subtitle: TextView = itemView!!.findViewById(R.id.subtitle)
     val date: TextView = itemView!!.findViewById(R.id.date)
-//    val priority: TextView = itemView!!.findViewById(R.id.priority)
+    val timeRemaining: TextView = itemView!!.findViewById(R.id.timeRemaining)
+    val color_bg:ConstraintLayout = itemView!!.findViewById(R.id.background_task)
 
     // Função para habilitar o menu de ações.
     override fun onLongClick(v: View?): Boolean {

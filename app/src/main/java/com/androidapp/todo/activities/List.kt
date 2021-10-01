@@ -2,6 +2,7 @@ package com.androidapp.todo.activities
 
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -22,6 +24,7 @@ import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.List
 
 class List : AppCompatActivity() {
 
@@ -55,6 +58,12 @@ class List : AppCompatActivity() {
         // Recupera o banco de dados.
         db = Room.databaseBuilder(applicationContext, TaskDatabase::class.java, "TaskList").build()
         consult()
+        var createTask = bindingList.createbtn as ImageView
+        createTask.setOnClickListener {
+            // Muda a tela para a activity main
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // Obtem os elementos do banco de dados.
@@ -69,6 +78,7 @@ class List : AppCompatActivity() {
     private fun fill(){
         runOnUiThread{
             val adapter = TaskAdapter(applicationContext, itens)
+
             bindingList.recycler.layoutManager = LinearLayoutManager(applicationContext)
             bindingList.recycler.itemAnimator = DefaultItemAnimator()
             bindingList.recycler.adapter = adapter

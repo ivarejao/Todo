@@ -17,6 +17,7 @@
     app:cardBackgroundColor="@android:color/transparent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/background_task"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorAccent"
@@ -90,12 +91,15 @@
             />
 
         <TextView
+            android:id="@+id/timeRemaining"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/taskcalendar"
             app:layout_constraintTop_toTopOf="@+id/taskcalendar"
-            android:textSize="@dimen/_16ssp"
+            android:textSize="@dimen/_12ssp"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimary"
             android:hint="@string/app_name"

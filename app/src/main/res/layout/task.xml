@@ -135,18 +135,6 @@
                     app:layout_constraintTop_toBottomOf="@id/subtitle"
                     />
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_50sdp"
-                    app:layout_constraintStart_toStartOf="@+id/back"
-                    app:layout_constraintTop_toTopOf="@+id/back"
-                    android:textSize="@dimen/_16ssp"
-                    android:textColor="@color/colorIcons"
-                    android:textColorHint="@color/colorIcons"
-                    android:hint="@string/app_name"
-                    android:fontFamily="@font/ubuntu_bold"/>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

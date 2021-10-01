@@ -24,6 +24,4 @@ class Task(
     @ColumnInfo(name = "sync")
     var sync: Boolean?
 
-//    @ColumnInfo(name = "priority")
-//    var priority: Int = 0
 )
