@@ -1,9 +1,8 @@
 package com.androidapp.todo
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.view.ContextMenu
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -18,45 +17,37 @@ class TaskAdapter(var context: Context, var itens : ArrayList<Task>) : RecyclerV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row, parent, false)
-        val holder = TaskViewHolder(view)
-        return holder
+        return TaskViewHolder(view)
     }
 
+    @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(viewHolder: TaskViewHolder, position: Int) {
 
         val format  = SimpleDateFormat("dd/MM/yyyy")
 
-        //task = itens.get(viewHolder.adapterPosition)
-        task = itens.get(viewHolder.bindingAdapterPosition)
-        viewHolder.title.text = task.title
-        viewHolder.subtitle.text = task.subtitle
-        viewHolder.date.text = format.format(task.date!!)
+        // Definindo como vai aparecer cada item do recyclerView
+        task = itens[viewHolder.bindingAdapterPosition]
+        ("Titulo:" + task.title).also { viewHolder.title.text = it }
+        ("Subtitulo: " + task.subtitle).also { viewHolder.subtitle.text = it }
+        ("Data: " + format.format(task.date!!)).also { viewHolder.date.text = it }
 
+        // Criando o handler para quando o item for clicado.
         viewHolder.itemView.setOnClickListener{
-            //task = itens.get(viewHolder.adapterPosition)
-            task = itens.get(viewHolder.bindingAdapterPosition)
-            //selectedPosition = viewHolder.adapterPosition
+            task = itens[viewHolder.bindingAdapterPosition]
             selectedPosition = viewHolder.bindingAdapterPosition
             Toast.makeText(context, "Segure para abrir o menu de opções!", Toast.LENGTH_LONG).show()
         }
 
-        viewHolder.itemView.setOnCreateContextMenuListener(object : View.OnCreateContextMenuListener{
-            override fun onCreateContextMenu(
-                menu: ContextMenu?,
-                v: View?,
-                menuInfo: ContextMenu.ContextMenuInfo?
-            ) {
-                menu!!.setHeaderTitle("Ações: ")
-                menu!!.add(0, 0, 0, "Visualizar")
-                menu!!.add(0, 1, 1, "Editar")
-                menu!!.add(0, 2, 2, "Deletar")
+        // Menu de ação que será exibido quando ouver um LonClick
+        viewHolder.itemView.setOnCreateContextMenuListener { menu, _, _ ->
+            menu!!.setHeaderTitle("Ações: ")
+            menu.add(0, 0, 0, "Visualizar")
+            menu.add(0, 1, 1, "Editar")
+            menu.add(0, 2, 2, "Deletar")
 
-                //task = itens.get(viewHolder.adapterPosition)
-                task = itens.get(viewHolder.bindingAdapterPosition)
-                //selectedPosition = viewHolder.adapterPosition
-                selectedPosition = viewHolder.bindingAdapterPosition
-            }
-        })
+            task = itens[viewHolder.bindingAdapterPosition]
+            selectedPosition = viewHolder.bindingAdapterPosition
+        }
     }
 
     override fun getItemCount(): Int {
