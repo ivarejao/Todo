@@ -2,12 +2,15 @@ package com.androidapp.todo.activities
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.text.Html
+import android.text.Html.fromHtml
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 
 class UppercaseActivity : Activity() {
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,6 +33,7 @@ class UppercaseActivity : Activity() {
 
 class BoldcaseActivity : Activity() {
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,7 +43,7 @@ class BoldcaseActivity : Activity() {
         if(!readonly && text != null){
 
             val outgoingIntent = Intent()
-            var res = Html.fromHtml("<b>$text<b>")
+            var res = fromHtml("<b>$text<b>")
             outgoingIntent.putExtra(Intent.EXTRA_PROCESS_TEXT, res)
             setResult(Activity.RESULT_OK, outgoingIntent)
 
@@ -53,6 +57,7 @@ class BoldcaseActivity : Activity() {
 
 class ItaliccaseActivity : Activity() {
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -62,7 +67,7 @@ class ItaliccaseActivity : Activity() {
         if(!readonly && text != null){
 
             val outgoingIntent = Intent()
-            var res = Html.fromHtml("<i>$text<i>")
+            var res = fromHtml("<i>$text<i>")
             outgoingIntent.putExtra(Intent.EXTRA_PROCESS_TEXT, res)
             setResult(Activity.RESULT_OK, outgoingIntent)
 
@@ -76,6 +81,7 @@ class ItaliccaseActivity : Activity() {
 
 class UnderLinedcaseActivity : Activity() {
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -85,7 +91,7 @@ class UnderLinedcaseActivity : Activity() {
         if(!readonly && text != null){
 
             val outgoingIntent = Intent()
-            var res = Html.fromHtml("<u>$text<u>")
+            var res = fromHtml("<u>$text<u>")
             outgoingIntent.putExtra(Intent.EXTRA_PROCESS_TEXT, res)
             setResult(Activity.RESULT_OK, outgoingIntent)
 

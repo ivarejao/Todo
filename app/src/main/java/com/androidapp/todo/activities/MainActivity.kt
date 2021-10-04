@@ -3,10 +3,12 @@ package com.androidapp.todo.activities
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.androidapp.todo.database.TaskDatabase
 import com.androidapp.todo.databinding.ActivityMainBinding
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private var cal:Calendar = Calendar.getInstance()
     private var date : String = ""
 
+    @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         // Inicializa a tela principal da aplicação.
@@ -32,10 +35,13 @@ class MainActivity : AppCompatActivity() {
         // Fazendo binding da tela para não ter que buscar os elementos da mesma toda hora.
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
+        binding.text.setText(intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT).toString());
         setContentView(view)
 
         // Recupera o banco de dados.
         db = Room.databaseBuilder(applicationContext, TaskDatabase::class.java, "TaskList").build()
+
+
 
         // Evento que ocorre quando a data for selecionada dentro do dialog.
         val dateSetListener =
@@ -46,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
                 // Faz a formatação da data lida usando o locale da Itália pois era o que mais se adaptava
                 // ao nosso sistema de data dentre os locales disponiveis.
-                val formatador = SimpleDateFormat("dd//MM/yyyy", Locale.ITALY)
+                val formatador = SimpleDateFormat("dd/MM/yyyy", Locale.ITALY)
 
                 date = formatador.format(cal.time)
             }
@@ -66,7 +72,7 @@ class MainActivity : AppCompatActivity() {
             // Recuperação dos valores digitados nos campos.
             val title = binding.title.text.toString()
             val subtitle = binding.subtitle.text.toString()
-            val text = binding.text.text.toString()
+            var text = binding.text.text.toString()
             val sync = binding.checkBox.isChecked
 
             // Tratamento das variáveis lidas.
@@ -89,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> {
                     // Caso as variáveis estejam todas preenchidas, executa este código.
-                    val format = SimpleDateFormat("dd//MM/yyyy")
+                    val format = SimpleDateFormat("dd/MM/yyyy")
 
                     // Cria uma instancia da classe tarefa.
                     val task = Task(0, title, subtitle, text, format.parse(date), sync)
@@ -107,13 +113,11 @@ class MainActivity : AppCompatActivity() {
                                 binding.checkBox.toggle()
                         }
                     }.start()
-
-                    //
-                    // TODO
-                    // Caso sync seja true interagir com a API google calendar
-                    //
                 }
             }
+        }
+        if (binding.checkBox.isChecked == true){
+
         }
 
         // Criando o handler para quando o botão 'LISTAR' for clicado.
