@@ -5,13 +5,14 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spannable
+import android.text.style.UnderlineSpan
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -23,8 +24,6 @@ import com.androidapp.todo.entities.Task
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.List
 
 class List : AppCompatActivity() {
 
@@ -39,6 +38,9 @@ class List : AppCompatActivity() {
     lateinit var subtitle : EditText
     lateinit var text : EditText
     private lateinit var dateButton : Button
+    private lateinit var boldbtn : Button
+    private lateinit var italicbtn : Button
+    private lateinit var underlinebtn : Button
 
     private lateinit var register : Button
     private lateinit var back : Button
@@ -145,6 +147,9 @@ class List : AppCompatActivity() {
         subtitle = dialog.findViewById(R.id.subtitle) as EditText
         text = dialog.findViewById(R.id.text) as EditText
         dateButton = dialog.findViewById(R.id.date) as Button
+        boldbtn = dialog.findViewById(R.id.boldbtn) as Button
+        italicbtn = dialog.findViewById(R.id.italicbtn) as Button
+        underlinebtn = dialog.findViewById(R.id.underlinebtn) as Button
 
         register = dialog.findViewById(R.id.register) as Button
 //        register = dialog.findViewById(R.id.register) as Button
@@ -167,6 +172,44 @@ class List : AppCompatActivity() {
 
                 date = formatador.format(cal.time)
             }
+
+        boldbtn.setOnClickListener {
+            //            Toast.makeText(this, "Actually on this", Toast.LENGTH_SHORT).show()
+            var editxt = text as EditText
+            val init = editxt.selectionStart
+            val end = editxt.selectionEnd
+            editxt.text.setSpan(
+                android.text.style.StyleSpan(android.graphics.Typeface.BOLD),
+                init, end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+        }
+
+        italicbtn.setOnClickListener {
+            var editxt = text as EditText
+            val init = editxt.selectionStart
+            val end = editxt.selectionEnd
+            editxt.text.setSpan(
+                android.text.style.StyleSpan(android.graphics.Typeface.ITALIC),
+                init, end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+        }
+
+        underlinebtn.setOnClickListener {
+            var editxt = text as EditText
+            val init = editxt.selectionStart
+            val end = editxt.selectionEnd
+            editxt.text.setSpan(
+                UnderlineSpan(),
+                init, end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+        }
+
 
         // Criando o handler para quando o botão 'DATA' for clicado.
         dateButton.setOnClickListener{

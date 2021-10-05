@@ -119,7 +119,7 @@
                 android:textColor="@color/colorTextSubtitle"
                 android:textColorHint="@color/colorTextHint"
                 android:textSize="@dimen/_13ssp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/textDateTime"
                 app:layout_constraintStart_toEndOf="@+id/viewSubtitleIndicator"
                 app:layout_constraintTop_toBottomOf="@id/textDateTime" />
 
@@ -156,6 +156,60 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/subtitle"
                 android:lineSpacingExtra="@dimen/_8ssp"/>
+
+            <ImageView
+                android:id="@+id/typeText"
+                android:layout_width="123dp"
+                android:layout_height="@dimen/_35sdp"
+                android:background="@drawable/background_subtitle_indicator"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="@id/subtitle"
+                app:layout_constraintEnd_toEndOf="@+id/register"
+                app:layout_constraintStart_toStartOf="@id/checkBox"
+                app:layout_constraintTop_toTopOf="@id/subtitle"/>
+
+            <Button
+                android:id="@+id/boldbtn"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:background="@drawable/format_bold"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintStart_toStartOf="@id/checkBox"
+                app:layout_constraintTop_toTopOf="@id/typeText"
+                app:layout_constraintBottom_toBottomOf="@id/typeText"
+                android:layout_marginLeft="@dimen/_6sdp"
+                android:backgroundTint="@color/colorPrimary"/>
+
+
+
+            <Button
+                android:id="@+id/italicbtn"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:background="@drawable/format_italic"
+                android:backgroundTint="@color/colorPrimary"
+                app:layout_constraintStart_toEndOf="@id/boldbtn"
+                app:layout_constraintTop_toTopOf="@id/typeText"
+                app:layout_constraintBottom_toBottomOf="@id/typeText"
+                android:layout_marginLeft="@dimen/_6sdp" />
+
+            <Button
+                android:id="@+id/underlinebtn"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:background="@drawable/format_underline"
+                android:backgroundTint="@color/colorPrimary"
+                app:layout_constraintStart_toEndOf="@id/italicbtn"
+                app:layout_constraintTop_toTopOf="@id/typeText"
+                app:layout_constraintBottom_toBottomOf="@id/typeText"
+                app:layout_constraintEnd_toEndOf="@id/typeText"
+                android:layout_marginLeft="@dimen/_6sdp" />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

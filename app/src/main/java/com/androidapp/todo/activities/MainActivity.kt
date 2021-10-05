@@ -6,6 +6,9 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
+import android.text.Spannable
+import android.text.style.UnderlineSpan
+import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -35,13 +38,14 @@ class MainActivity : AppCompatActivity() {
         // Fazendo binding da tela para não ter que buscar os elementos da mesma toda hora.
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
-        binding.text.setText(intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT).toString());
+        if (intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT).toString().isNotEmpty()){
+            binding.text.setText(intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT).toString());
+        }
+
         setContentView(view)
 
         // Recupera o banco de dados.
         db = Room.databaseBuilder(applicationContext, TaskDatabase::class.java, "TaskList").build()
-
-
 
         // Evento que ocorre quando a data for selecionada dentro do dialog.
         val dateSetListener =
@@ -56,6 +60,8 @@ class MainActivity : AppCompatActivity() {
 
                 date = formatador.format(cal.time)
             }
+
+        setListeners(binding)
 
         // Criando o handler para quando o botão 'DATA' for clicado.
         binding.date.setOnClickListener{
@@ -113,6 +119,10 @@ class MainActivity : AppCompatActivity() {
                                 binding.checkBox.toggle()
                         }
                     }.start()
+
+                    // Muda a tela para a activity List
+                    val intent = Intent(applicationContext, kotlin.collections.List::class.java)
+                    startActivity(intent)
                 }
             }
         }
@@ -129,4 +139,45 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createEditable() = Editable.Factory.getInstance().newEditable("")
+
+    fun setListeners(binding: ActivityMainBinding){
+
+        binding.boldbtn.setOnClickListener {
+        //            Toast.makeText(this, "Actually on this", Toast.LENGTH_SHORT).show()
+            var editxt = binding.text as EditText
+            val init = editxt.selectionStart
+            val end = editxt.selectionEnd
+            editxt.text.setSpan(
+                android.text.style.StyleSpan(android.graphics.Typeface.BOLD),
+                init, end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+        }
+
+        binding.italicbtn.setOnClickListener {
+            var editxt = binding.text as EditText
+            val init = editxt.selectionStart
+            val end = editxt.selectionEnd
+            editxt.text.setSpan(
+                android.text.style.StyleSpan(android.graphics.Typeface.ITALIC),
+                init, end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+        }
+
+
+        binding.underlinebtn.setOnClickListener {
+            var editxt = binding.text as EditText
+            val init = editxt.selectionStart
+            val end = editxt.selectionEnd
+            editxt.text.setSpan(
+                UnderlineSpan(),
+                init, end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+        }
+    }
 }
