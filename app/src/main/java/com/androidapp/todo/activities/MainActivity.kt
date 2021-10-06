@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         // Fazendo binding da tela para não ter que buscar os elementos da mesma toda hora.
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
-        if (intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT).toString().isNotEmpty()){
+        if (!intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT).toString().isNullOrEmpty()){
             binding.text.setText(intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT).toString());
         }
 
@@ -122,14 +122,26 @@ class MainActivity : AppCompatActivity() {
                         }
                     }.start()
 
+                    if (binding.checkBox.isChecked){
+//                        val intent = Intent(Intent.ACTION_INSERT);
+//                        intent.setData(CalendarContract.CONTENT_URI);
+//                        intent.putExtra(CalendarContract.Events.TITLE, "$title - $subtitle")
+//                        intent.putExtra(CalendarContract.Events.DESCRIPTION, text)
+//                        intent.putExtra(CalendarContract.Events.ALL_DAY, "true")
+//                        intent.putExtra(CalendarContract.Events.LAST_DATE, date)
+//
+//                        if (intent.resolveActivity(packageManager) != null){
+//                            startActivity(intent)
+//                        } else{
+//                            Toast.makeText(this, "There is no app that can support this action.", Toast.LENGTH_SHORT).show()
+//                        }
+                    }
+
                     // Muda a tela para a activity List
-                    val intent = Intent(applicationContext, kotlin.collections.List::class.java)
-                    startActivity(intent)
+//                    val intent = Intent(applicationContext, kotlin.collections.List::class.java)
+//                    startActivity(intent)
                 }
             }
-        }
-        if (binding.checkBox.isChecked == true){
-
         }
 
         // Criando o handler para quando o botão 'LISTAR' for clicado.

@@ -55,9 +55,10 @@ class TaskAdapter(var context: Context, var itens: ArrayList<Task>) : RecyclerVi
         if (isLate) diff *=-1
 
         var str =  when {
-                diff > 0.toLong() && diff < 1.toLong() && !isLate -> "Today"
-                diff == 1.toLong() && diff < 2.toLong() -> "$diff day\n" + if (isLate) "left" else "late"
-                else                                    -> "$diff days\n"+ if (isLate) "left" else "late"
+                taskD == currentDay && !isLate -> "Today"
+                taskD != currentDay && diff >= 0.toLong() && diff < 1.toLong() && !isLate -> "Less than\n one day"
+                diff == 1.toLong() && diff < 2.toLong() -> "$diff day\n" + if (!isLate) "left" else "late"
+                else                                    -> "$diff days\n"+ if (!isLate) "left" else "late"
             }
         (str).also{viewHolder.timeRemaining.text = it}
 

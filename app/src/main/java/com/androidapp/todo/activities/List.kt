@@ -13,6 +13,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -60,7 +61,7 @@ class List : AppCompatActivity() {
         // Recupera o banco de dados.
         db = Room.databaseBuilder(applicationContext, TaskDatabase::class.java, "TaskList").build()
         consult()
-        var createTask = bindingList.createbtn as ImageView
+        var createTask = bindingList.createbtn as CardView
         createTask.setOnClickListener {
             // Muda a tela para a activity main
             val intent = Intent(applicationContext, MainActivity::class.java)

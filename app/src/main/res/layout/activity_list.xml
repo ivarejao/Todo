@@ -17,16 +17,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <ImageView
+    <androidx.cardview.widget.CardView
         android:id="@+id/createbtn"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
-        android:src="@drawable/createbutton"
+        android:background="@drawable/background_createbtn"
+        android:foreground="@drawable/ic_add"
+        android:foregroundGravity="center"
         android:contentDescription="@string/app_name"
         android:layout_marginBottom="@dimen/_24sdp"
         android:layout_marginEnd="@dimen/_24sdp"
         android:layout_marginRight="@dimen/_24sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:cardCornerRadius="@dimen/_40sdp"
+        app:cardElevation="@dimen/_15sdp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
