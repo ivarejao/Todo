@@ -13,7 +13,7 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     val subtitle: TextView = itemView!!.findViewById(R.id.subtitle)
     val date: TextView = itemView!!.findViewById(R.id.date)
     val timeRemaining: TextView = itemView!!.findViewById(R.id.timeRemaining)
-    val color_bg:ConstraintLayout = itemView!!.findViewById(R.id.background_task)
+    val color_bg: ConstraintLayout = itemView!!.findViewById(R.id.background_task)
 
     // Função para habilitar o menu de ações.
     override fun onLongClick(v: View?): Boolean {

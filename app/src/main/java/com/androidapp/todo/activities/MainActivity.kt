@@ -3,10 +3,12 @@ package com.androidapp.todo.activities
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.Spannable
+import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
 import android.widget.EditText
 import android.widget.Toast
@@ -140,17 +142,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun createEditable() = Editable.Factory.getInstance().newEditable("")
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun setListeners(binding: ActivityMainBinding){
 
         binding.boldbtn.setOnClickListener {
-        //            Toast.makeText(this, "Actually on this", Toast.LENGTH_SHORT).show()
             var editxt = binding.text as EditText
             val init = editxt.selectionStart
             val end = editxt.selectionEnd
             editxt.text.setSpan(
-                android.text.style.StyleSpan(android.graphics.Typeface.BOLD),
-                init, end,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    StyleSpan(Typeface.BOLD),
+                    init, end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
 
         }
@@ -160,7 +162,7 @@ class MainActivity : AppCompatActivity() {
             val init = editxt.selectionStart
             val end = editxt.selectionEnd
             editxt.text.setSpan(
-                android.text.style.StyleSpan(android.graphics.Typeface.ITALIC),
+                StyleSpan(Typeface.ITALIC),
                 init, end,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )

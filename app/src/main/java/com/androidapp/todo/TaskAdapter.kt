@@ -1,21 +1,19 @@
 package com.androidapp.todo
 
-import android.R.attr.data
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.androidapp.todo.entities.Task
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.Comparator
-import kotlin.collections.ArrayList
 
 
 class TaskAdapter(var context: Context, var itens: ArrayList<Task>) : RecyclerView.Adapter<TaskViewHolder>() {
@@ -29,6 +27,7 @@ class TaskAdapter(var context: Context, var itens: ArrayList<Task>) : RecyclerVi
         return TaskViewHolder(view)
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(viewHolder: TaskViewHolder, position: Int) {
         // Ordena as tarefas
@@ -52,20 +51,22 @@ class TaskAdapter(var context: Context, var itens: ArrayList<Task>) : RecyclerVi
         var time = TimeUnit.DAYS
         diff = time.convert(diff, TimeUnit.MILLISECONDS)
 
-        var str = if (diff >= 0) "$diff days\n left" else (diff*-1).toString() + " days\nlate"
+        val isLate = diff < 0
+        if (isLate) diff *=-1
+
+        var str =  when {
+                diff > 0.toLong() && diff < 1.toLong() && !isLate -> "Today"
+                diff == 1.toLong() && diff < 2.toLong() -> "$diff day\n" + if (isLate) "left" else "late"
+                else                                    -> "$diff days\n"+ if (isLate) "left" else "late"
+            }
         (str).also{viewHolder.timeRemaining.text = it}
 
-        var color:String
-        if (diff < 0){
-            color = "#FF4842"
-        } else if (diff >= 0 && diff < 5){
-            color = "#ff8e42"
-        } else if (diff >= 5 && diff < 10){
-            color = "#ffc642"
-        } else if (diff >= 10 && diff < 30){
-            color = "#7bff42"
-        } else{
-            color = "#4248ff"
+        val color = when{
+            diff < 0                -> "#FF4842"
+            diff in 0..4            -> "#ff8e42"
+            diff in 5..9            -> "#ffc642"
+            diff in 10..29          -> "#7bff42"
+            else                    -> "#4248ff"
         }
 
         viewHolder.color_bg.setBackgroundColor(Color.parseColor(color))

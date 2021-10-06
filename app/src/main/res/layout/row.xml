@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/row"
     android:layout_width="@dimen/_290sdp"
     android:layout_height="@dimen/_80sdp"
     app:cardCornerRadius="30dp"
@@ -20,8 +21,8 @@
         android:id="@+id/background_task"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent"
         android:animateLayoutChanges="true"
+        android:background="@drawable/row_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
