@@ -6,13 +6,12 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.Spannable
-import android.text.style.UnderlineSpan
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -30,30 +29,16 @@ import java.util.*
  */
 class List : AppCompatActivity() {
 
-    /**
-     * Banco de dados.
-     */
+    // Banco de dados da aplicação.
     lateinit var db : TaskDatabase
     private lateinit var bindingList: ActivityListBinding
 
     private lateinit var itens : ArrayList<Task>
 
-    /**
-     * Titulo da tarefa.
-     */
-    lateinit var title : EditText
-
-    /**
-     * Subtitulo da tarefa.
-     */
-    lateinit var subtitle : EditText
-
-    /**
-     * Texto da tarefa.
-     */
-    lateinit var text : EditText
-
     // Variáveis para fazer referência aos elementos da tela
+    lateinit var title : EditText
+    lateinit var subtitle : EditText
+    lateinit var text : EditText
     private lateinit var dateButton : Button
     private lateinit var boldbtn : Button
     private lateinit var italicbtn : Button
@@ -66,11 +51,6 @@ class List : AppCompatActivity() {
     // Calendario como variável global.
     private var cal:Calendar = Calendar.getInstance()
 
-    /**
-     * Faz a criação da tela, instancia o banco de dados e chama a função consult().
-     *
-     * @param savedInstanceState Parametro opcional que representa mensagens vindas de outras activities.
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -82,7 +62,7 @@ class List : AppCompatActivity() {
         // Recupera o banco de dados.
         db = Room.databaseBuilder(applicationContext, TaskDatabase::class.java, "TaskList").build()
         consult()
-        val createTask = bindingList.createbtn
+        var createTask = bindingList.createbtn as CardView
         createTask.setOnClickListener {
             // Muda a tela para a activity main
             val intent = Intent(applicationContext, MainActivity::class.java)
@@ -90,20 +70,16 @@ class List : AppCompatActivity() {
         }
     }
 
-    /**
-     * Obtem as tarefas do banco de dados e as armazena na variável da classe 'itens'.
-     */
-    fun consult(){
+    // Obtem os elementos do banco de dados.
+    private fun consult(){
         Thread{
             itens = db.TaskDao().getAllTasks() as ArrayList<Task>
             fill()
             }.start()
     }
 
-    /**
-     * Preenche a tela com as tarefas contidas na variável da classe 'itens'.
-     */
-    fun fill(){
+    // Preenche a tela com os elementos obtidos.
+    private fun fill(){
         runOnUiThread{
             val adapter = TaskAdapter(applicationContext, itens)
 
@@ -113,12 +89,7 @@ class List : AppCompatActivity() {
         }
     }
 
-    /**
-     * Interpreta o clique do usuário e invoca a função equivalente (visualizar, editar, excluir).
-     *
-     * @param item É o elemento da lista ao qual o menu que será aberto se refere.
-     * @return Boolean indicando se alguma posição do menu foi clicada ou não.
-     */
+    // Função do menu de contexto.
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val adapter = bindingList.recycler.adapter as TaskAdapter
         task = adapter.task
@@ -142,14 +113,8 @@ class List : AppCompatActivity() {
         return super.onContextItemSelected(item)
     }
 
-    /**
-     * Faz o display um botao de desfazer por aproximadamente 5 segundos.
-     * Caso o botão seja apertado, invoca consult().
-     * Caso o timer acabe, deleta a tarefa do banco de dados.
-     *
-     * @param task Tarefa a ser excluida.
-     */
-    fun deleteTask(task: Task){
+    // Exclusão do banco de dados.
+    private fun deleteTask(task: Task){
         val timer = Timer()
 
         // Se o usuário clicar em desfazer o timer é cancelado e é feita outra consulta ao banco de dados para popular a tela.
@@ -167,29 +132,26 @@ class List : AppCompatActivity() {
         }, 5000)
     }
 
-    /**
-     * Cria o dialogo de edição de tarefa.
-     */
     private fun displayEditDialog(){
+        // Cria o dialog a ser exibido para a tela de edição.
         val dialog = Dialog(this)
         dialog.setTitle("Editar")
         dialog.setContentView(R.layout.activity_main)
+//        dialog.setContentView(R.layout.register)
         dialog.setCancelable(true)
-        val lp : WindowManager.LayoutParams = WindowManager.LayoutParams()
-        lp.copyFrom(dialog.window?.attributes)
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT
+        var lp : WindowManager.LayoutParams = WindowManager.LayoutParams();
+        lp.copyFrom(dialog.window?.attributes);
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
 
         // Recupera os elementos do dialog
         title = dialog.findViewById(R.id.title) as EditText
         subtitle = dialog.findViewById(R.id.subtitle) as EditText
         text = dialog.findViewById(R.id.text) as EditText
         dateButton = dialog.findViewById(R.id.date) as Button
-        boldbtn = dialog.findViewById(R.id.boldbtn) as Button
-        italicbtn = dialog.findViewById(R.id.italicbtn) as Button
-        underlinebtn = dialog.findViewById(R.id.underlinebtn) as Button
 
         register = dialog.findViewById(R.id.register) as Button
+//        register = dialog.findViewById(R.id.register) as Button
         back = dialog.findViewById(R.id.back) as Button
 
         val formatador = SimpleDateFormat("dd/MM/yyyy", Locale.ITALY)
@@ -209,39 +171,6 @@ class List : AppCompatActivity() {
 
                 date = formatador.format(cal.time)
             }
-
-        boldbtn.setOnClickListener {
-            val editxt = text
-            val init = editxt.selectionStart
-            val end = editxt.selectionEnd
-            editxt.text.setSpan(
-                android.text.style.StyleSpan(android.graphics.Typeface.BOLD),
-                init, end,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-        }
-
-        italicbtn.setOnClickListener {
-            val editxt = text
-            val init = editxt.selectionStart
-            val end = editxt.selectionEnd
-            editxt.text.setSpan(
-                android.text.style.StyleSpan(android.graphics.Typeface.ITALIC),
-                init, end,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-        }
-
-        underlinebtn.setOnClickListener {
-            val editxt = text
-            val init = editxt.selectionStart
-            val end = editxt.selectionEnd
-            editxt.text.setSpan(
-                UnderlineSpan(),
-                init, end,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-        }
 
         // Criando o handler para quando o botão 'DATA' for clicado.
         dateButton.setOnClickListener{
@@ -288,7 +217,7 @@ class List : AppCompatActivity() {
         })
 
         // Set dialog background as transparent
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
         // Criando o handler para quando o botão 'CANCELAR' for clicado.
         back.setOnClickListener{
@@ -297,20 +226,18 @@ class List : AppCompatActivity() {
         }
 
         dialog.show()
-        dialog.window?.attributes = lp
+        dialog.window?.attributes = lp;
     }
 
-    /**
-     * Cria um dialogo para mostrar a tarefa que foi selecionada.
-     */
-    fun displayDialog() {
+    private fun displayDialog() {
+        // Cria o dialog a ser exibido para a tela de visualização.
         val dialog = Dialog(this)
         dialog.setTitle("Editar")
         dialog.setContentView(R.layout.task)
         dialog.setCancelable(true)
 
         // Recupera os elementos do dialog.
-        // Variáveis criadas localmente e não usando as que existem na classe pois seus tipos na tela são diferentes.
+        // Variáveis criadas localmente e não usasndo as que estavam la fora pois seus tipos na tela são diferentes.
         // Essas variáveis não são possiveis de serem editadas pelo usuário.
         val vTitle: TextView = dialog.findViewById(R.id.title) as TextView
         val vSubtitle: TextView = dialog.findViewById(R.id.subtitle) as TextView
@@ -326,7 +253,7 @@ class List : AppCompatActivity() {
         ("Data: " + formatador.format(task.date!!)).also { vDate.text = it }
 
         // Set dialog background as transparent
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
         // Set back button
         back = dialog.findViewById(R.id.back) as Button
@@ -338,12 +265,8 @@ class List : AppCompatActivity() {
         dialog.show()
     }
 
-    /**
-     * Atualiza uma dada tarefa no banco de dados e invoca consult().
-     *
-     * @param task Tarefa a ser atualizada.
-     */
-    fun updateTask(task: Task){
+    // Função para atualizar uma dada tarefa no banco de dados.
+    private fun updateTask(task: Task){
         Thread{
             db.TaskDao().updateTask(task)
             consult()

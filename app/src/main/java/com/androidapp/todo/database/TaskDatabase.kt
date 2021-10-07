@@ -4,8 +4,8 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.androidapp.todo.dao.TaskDao
-import com.androidapp.todo.entities.Task
 import com.androidapp.todo.entities.DateConverter
+import com.androidapp.todo.entities.Task
 
 /**
  * Classe necessária para se implementar um banco de dados usando o RoomDatabase

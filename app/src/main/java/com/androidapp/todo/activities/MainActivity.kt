@@ -3,13 +3,9 @@ package com.androidapp.todo.activities
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
-import android.text.Spannable
-import android.text.style.StyleSpan
-import android.text.style.UnderlineSpan
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -71,8 +67,6 @@ class MainActivity : AppCompatActivity() {
                 date = formatador.format(cal.time)
             }
 
-        setListeners(binding)
-
         // Criando o handler para quando o botão 'DATA' for clicado.
         binding.date.setOnClickListener{
             // Cria um dialog para a seleção da data.
@@ -129,6 +123,9 @@ class MainActivity : AppCompatActivity() {
                                 binding.checkBox.toggle()
                         }
                     }.start()
+
+                    val intent = Intent(applicationContext, List::class.java)
+                    startActivity(intent)
                 }
             }
         }
@@ -145,41 +142,4 @@ class MainActivity : AppCompatActivity() {
      * Limpa os campos após a criação de uma tarefa.
      */
     fun createEditable() = Editable.Factory.getInstance().newEditable("")
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun setListeners(binding: ActivityMainBinding){
-
-        binding.boldbtn.setOnClickListener {
-            val editxt = binding.text
-            val init = editxt.selectionStart
-            val end = editxt.selectionEnd
-            editxt.text.setSpan(
-                    StyleSpan(Typeface.BOLD),
-                    init, end,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-        }
-
-        binding.italicbtn.setOnClickListener {
-            val editxt = binding.text
-            val init = editxt.selectionStart
-            val end = editxt.selectionEnd
-            editxt.text.setSpan(
-                StyleSpan(Typeface.ITALIC),
-                init, end,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-        }
-
-        binding.underlinebtn.setOnClickListener {
-            val editxt = binding.text
-            val init = editxt.selectionStart
-            val end = editxt.selectionEnd
-            editxt.text.setSpan(
-                UnderlineSpan(),
-                init, end,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-        }
-    }
 }

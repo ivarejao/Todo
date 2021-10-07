@@ -10,9 +10,10 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.androidapp.todo.R
-import com.androidapp.todo.viewHolder.TaskViewHolder
 import com.androidapp.todo.entities.Task
+import com.androidapp.todo.viewHolder.TaskViewHolder
 import java.text.SimpleDateFormat
+import java.time.ZoneId
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -33,7 +34,7 @@ class TaskAdapter(var context: Context, var itens: ArrayList<Task>) : RecyclerVi
         return TaskViewHolder(view)
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SimpleDateFormat")
     /**
      * Faz o bind de cada elemento da lista ao viewHolder, para indicar como eles serão exibidos e habilitar os handlers.
@@ -66,9 +67,12 @@ class TaskAdapter(var context: Context, var itens: ArrayList<Task>) : RecyclerVi
         val isLate = diff < 0
         if (isLate) diff *=-1
 
+        val d1 = dayTask.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+        val d2 = dayCurrent.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+
         val str =  when {
-                dayTask == dayCurrent && !isLate -> "Today"
-                dayTask != dayCurrent && diff >= 0.toLong() && diff < 1.toLong() && !isLate -> "Less than\n one day"
+                d1.isEqual(d2) && !isLate -> "Today"
+                !d1.isEqual(d2) && diff >= 0.toLong() && diff < 1.toLong() && !isLate -> "Less than\n one day"
                 diff == 1.toLong() && diff < 2.toLong() -> "$diff day\n" + if (!isLate) "left" else "late"
                 else                                    -> "$diff days\n"+ if (!isLate) "left" else "late"
             }
