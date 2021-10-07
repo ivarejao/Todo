@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'org.jetbrains.dokka'
 }
 
 android {
@@ -40,6 +41,16 @@ android {
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
     }
+}
+
+tasks.dokkaHtml.configure{
+    outputDirectory.set(file("../documentation/html"))
+}
+
+tasks.withType(dokkaHtml.getClass()).configureEach{
+    pluginsMapConfiguration.set(
+            ["org.jetbrains.dokka.base.DokkaBase": """{ "separateInheritedMembers": true}"""]
+    )
 }
 
 dependencies {
