@@ -6,6 +6,9 @@ import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 
+/**
+ * Classe que permite que um texto selecionado em qualquer lugar possa ser usado para criar uma nota no aplicativo.
+ */
 class NoteExport : Activity() {
 
     @RequiresApi(Build.VERSION_CODES.M)

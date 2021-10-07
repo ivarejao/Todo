@@ -10,7 +10,6 @@ import android.text.Editable
 import android.text.Spannable
 import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
-import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -21,10 +20,15 @@ import com.androidapp.todo.entities.Task
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Classe que manipula a atividade de criar tarefas.
+ */
 class MainActivity : AppCompatActivity() {
 
-    // Banco de dados da aplicação.
-    private lateinit var db : TaskDatabase
+    /**
+     * Banco de dados.
+     */
+    lateinit var db : TaskDatabase
     private lateinit var binding: ActivityMainBinding
 
     // Calendario e data como variáveis globais.
@@ -32,7 +36,10 @@ class MainActivity : AppCompatActivity() {
     private var date : String = ""
 
     @RequiresApi(Build.VERSION_CODES.M)
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "NewApi")
+    /**
+     * Faz a inicialização da tela, define os handlers para os clicks e faz validações dos campos.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         // Inicializa a tela principal da aplicação.
         super.onCreate(savedInstanceState)
@@ -40,8 +47,9 @@ class MainActivity : AppCompatActivity() {
         // Fazendo binding da tela para não ter que buscar os elementos da mesma toda hora.
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
-        if (!intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT).toString().isNullOrEmpty()){
-            binding.text.setText(intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT).toString());
+        val exportText = intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT).toString()
+        if (!("null" in exportText || exportText.contains("null"))){
+            binding.text.setText(exportText)
         }
 
         setContentView(view)
@@ -80,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             // Recuperação dos valores digitados nos campos.
             val title = binding.title.text.toString()
             val subtitle = binding.subtitle.text.toString()
-            var text = binding.text.text.toString()
+            val text = binding.text.text.toString()
             val sync = binding.checkBox.isChecked
 
             // Tratamento das variáveis lidas.
@@ -121,25 +129,6 @@ class MainActivity : AppCompatActivity() {
                                 binding.checkBox.toggle()
                         }
                     }.start()
-
-                    if (binding.checkBox.isChecked){
-//                        val intent = Intent(Intent.ACTION_INSERT);
-//                        intent.setData(CalendarContract.CONTENT_URI);
-//                        intent.putExtra(CalendarContract.Events.TITLE, "$title - $subtitle")
-//                        intent.putExtra(CalendarContract.Events.DESCRIPTION, text)
-//                        intent.putExtra(CalendarContract.Events.ALL_DAY, "true")
-//                        intent.putExtra(CalendarContract.Events.LAST_DATE, date)
-//
-//                        if (intent.resolveActivity(packageManager) != null){
-//                            startActivity(intent)
-//                        } else{
-//                            Toast.makeText(this, "There is no app that can support this action.", Toast.LENGTH_SHORT).show()
-//                        }
-                    }
-
-                    // Muda a tela para a activity List
-//                    val intent = Intent(applicationContext, kotlin.collections.List::class.java)
-//                    startActivity(intent)
                 }
             }
         }
@@ -152,13 +141,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun createEditable() = Editable.Factory.getInstance().newEditable("")
+    /**
+     * Limpa os campos após a criação de uma tarefa.
+     */
+    fun createEditable() = Editable.Factory.getInstance().newEditable("")
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun setListeners(binding: ActivityMainBinding){
 
         binding.boldbtn.setOnClickListener {
-            var editxt = binding.text as EditText
+            val editxt = binding.text
             val init = editxt.selectionStart
             val end = editxt.selectionEnd
             editxt.text.setSpan(
@@ -166,11 +158,10 @@ class MainActivity : AppCompatActivity() {
                     init, end,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-
         }
 
         binding.italicbtn.setOnClickListener {
-            var editxt = binding.text as EditText
+            val editxt = binding.text
             val init = editxt.selectionStart
             val end = editxt.selectionEnd
             editxt.text.setSpan(
@@ -178,12 +169,10 @@ class MainActivity : AppCompatActivity() {
                 init, end,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-
         }
 
-
         binding.underlinebtn.setOnClickListener {
-            var editxt = binding.text as EditText
+            val editxt = binding.text
             val init = editxt.selectionStart
             val end = editxt.selectionEnd
             editxt.text.setSpan(
@@ -191,7 +180,6 @@ class MainActivity : AppCompatActivity() {
                 init, end,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-
         }
     }
 }
