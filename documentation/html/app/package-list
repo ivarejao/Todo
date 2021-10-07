@@ -1,0 +1,69 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.androidapp.todo.activities////PointingToDeclaration/app/com.androidapp.todo.activities/index.html
+$dokka.location:com.androidapp.todo.activities/List///PointingToDeclaration/app/com.androidapp.todo.activities/-list/index.html
+$dokka.location:com.androidapp.todo.activities/List/List/#/PointingToDeclaration/app/com.androidapp.todo.activities/-list/-list.html
+$dokka.location:com.androidapp.todo.activities/List/db/#/PointingToDeclaration/app/com.androidapp.todo.activities/-list/db.html
+$dokka.location:com.androidapp.todo.activities/List/onContextItemSelected/#android.view.MenuItem/PointingToDeclaration/app/com.androidapp.todo.activities/-list/on-context-item-selected.html
+$dokka.location:com.androidapp.todo.activities/List/subtitle/#/PointingToDeclaration/app/com.androidapp.todo.activities/-list/subtitle.html
+$dokka.location:com.androidapp.todo.activities/List/text/#/PointingToDeclaration/app/com.androidapp.todo.activities/-list/text.html
+$dokka.location:com.androidapp.todo.activities/List/title/#/PointingToDeclaration/app/com.androidapp.todo.activities/-list/title.html
+$dokka.location:com.androidapp.todo.activities/MainActivity///PointingToDeclaration/app/com.androidapp.todo.activities/-main-activity/index.html
+$dokka.location:com.androidapp.todo.activities/MainActivity/MainActivity/#/PointingToDeclaration/app/com.androidapp.todo.activities/-main-activity/-main-activity.html
+$dokka.location:com.androidapp.todo.activities/MainActivity/createEditable/#/PointingToDeclaration/app/com.androidapp.todo.activities/-main-activity/create-editable.html
+$dokka.location:com.androidapp.todo.activities/MainActivity/db/#/PointingToDeclaration/app/com.androidapp.todo.activities/-main-activity/db.html
+$dokka.location:com.androidapp.todo.activities/NoteExport///PointingToDeclaration/app/com.androidapp.todo.activities/-note-export/index.html
+$dokka.location:com.androidapp.todo.activities/NoteExport/NoteExport/#/PointingToDeclaration/app/com.androidapp.todo.activities/-note-export/-note-export.html
+$dokka.location:com.androidapp.todo.adapter////PointingToDeclaration/app/com.androidapp.todo.adapter/index.html
+$dokka.location:com.androidapp.todo.adapter/TaskAdapter///PointingToDeclaration/app/com.androidapp.todo.adapter/-task-adapter/index.html
+$dokka.location:com.androidapp.todo.adapter/TaskAdapter/TaskAdapter/#android.content.Context#java.util.ArrayList[com.androidapp.todo.entities.Task]/PointingToDeclaration/app/com.androidapp.todo.adapter/-task-adapter/-task-adapter.html
+$dokka.location:com.androidapp.todo.adapter/TaskAdapter/context/#/PointingToDeclaration/app/com.androidapp.todo.adapter/-task-adapter/context.html
+$dokka.location:com.androidapp.todo.adapter/TaskAdapter/deleteTask/#/PointingToDeclaration/app/com.androidapp.todo.adapter/-task-adapter/delete-task.html
+$dokka.location:com.androidapp.todo.adapter/TaskAdapter/getItemCount/#/PointingToDeclaration/app/com.androidapp.todo.adapter/-task-adapter/get-item-count.html
+$dokka.location:com.androidapp.todo.adapter/TaskAdapter/itens/#/PointingToDeclaration/app/com.androidapp.todo.adapter/-task-adapter/itens.html
+$dokka.location:com.androidapp.todo.adapter/TaskAdapter/onBindViewHolder/#com.androidapp.todo.viewHolder.TaskViewHolder#kotlin.Int/PointingToDeclaration/app/com.androidapp.todo.adapter/-task-adapter/on-bind-view-holder.html
+$dokka.location:com.androidapp.todo.adapter/TaskAdapter/onCreateViewHolder/#android.view.ViewGroup#kotlin.Int/PointingToDeclaration/app/com.androidapp.todo.adapter/-task-adapter/on-create-view-holder.html
+$dokka.location:com.androidapp.todo.adapter/TaskAdapter/selectedPosition/#/PointingToDeclaration/app/com.androidapp.todo.adapter/-task-adapter/selected-position.html
+$dokka.location:com.androidapp.todo.adapter/TaskAdapter/task/#/PointingToDeclaration/app/com.androidapp.todo.adapter/-task-adapter/task.html
+$dokka.location:com.androidapp.todo.dao////PointingToDeclaration/app/com.androidapp.todo.dao/index.html
+$dokka.location:com.androidapp.todo.dao/TaskDao///PointingToDeclaration/app/com.androidapp.todo.dao/-task-dao/index.html
+$dokka.location:com.androidapp.todo.dao/TaskDao/deleteTask/#com.androidapp.todo.entities.Task/PointingToDeclaration/app/com.androidapp.todo.dao/-task-dao/delete-task.html
+$dokka.location:com.androidapp.todo.dao/TaskDao/getAllTasks/#/PointingToDeclaration/app/com.androidapp.todo.dao/-task-dao/get-all-tasks.html
+$dokka.location:com.androidapp.todo.dao/TaskDao/getTaskByName/#kotlin.String/PointingToDeclaration/app/com.androidapp.todo.dao/-task-dao/get-task-by-name.html
+$dokka.location:com.androidapp.todo.dao/TaskDao/insertTasks/#kotlin.Array[com.androidapp.todo.entities.Task]/PointingToDeclaration/app/com.androidapp.todo.dao/-task-dao/insert-tasks.html
+$dokka.location:com.androidapp.todo.dao/TaskDao/updateTask/#com.androidapp.todo.entities.Task/PointingToDeclaration/app/com.androidapp.todo.dao/-task-dao/update-task.html
+$dokka.location:com.androidapp.todo.database////PointingToDeclaration/app/com.androidapp.todo.database/index.html
+$dokka.location:com.androidapp.todo.database/TaskDatabase///PointingToDeclaration/app/com.androidapp.todo.database/-task-database/index.html
+$dokka.location:com.androidapp.todo.database/TaskDatabase/TaskDao/#/PointingToDeclaration/app/com.androidapp.todo.database/-task-database/-task-dao.html
+$dokka.location:com.androidapp.todo.database/TaskDatabase/TaskDatabase/#/PointingToDeclaration/app/com.androidapp.todo.database/-task-database/-task-database.html
+$dokka.location:com.androidapp.todo.entities////PointingToDeclaration/app/com.androidapp.todo.entities/index.html
+$dokka.location:com.androidapp.todo.entities/DateConverter///PointingToDeclaration/app/com.androidapp.todo.entities/-date-converter/index.html
+$dokka.location:com.androidapp.todo.entities/DateConverter/DateConverter/#/PointingToDeclaration/app/com.androidapp.todo.entities/-date-converter/-date-converter.html
+$dokka.location:com.androidapp.todo.entities/DateConverter/dateToTimestamp/#java.util.Date?/PointingToDeclaration/app/com.androidapp.todo.entities/-date-converter/date-to-timestamp.html
+$dokka.location:com.androidapp.todo.entities/DateConverter/fromTimeStamp/#kotlin.Long/PointingToDeclaration/app/com.androidapp.todo.entities/-date-converter/from-time-stamp.html
+$dokka.location:com.androidapp.todo.entities/Task///PointingToDeclaration/app/com.androidapp.todo.entities/-task/index.html
+$dokka.location:com.androidapp.todo.entities/Task/Task/#kotlin.Int#kotlin.String?#kotlin.String?#kotlin.String?#java.util.Date?#kotlin.Boolean?/PointingToDeclaration/app/com.androidapp.todo.entities/-task/-task.html
+$dokka.location:com.androidapp.todo.entities/Task/date/#/PointingToDeclaration/app/com.androidapp.todo.entities/-task/date.html
+$dokka.location:com.androidapp.todo.entities/Task/id/#/PointingToDeclaration/app/com.androidapp.todo.entities/-task/id.html
+$dokka.location:com.androidapp.todo.entities/Task/subtitle/#/PointingToDeclaration/app/com.androidapp.todo.entities/-task/subtitle.html
+$dokka.location:com.androidapp.todo.entities/Task/sync/#/PointingToDeclaration/app/com.androidapp.todo.entities/-task/sync.html
+$dokka.location:com.androidapp.todo.entities/Task/text/#/PointingToDeclaration/app/com.androidapp.todo.entities/-task/text.html
+$dokka.location:com.androidapp.todo.entities/Task/title/#/PointingToDeclaration/app/com.androidapp.todo.entities/-task/title.html
+$dokka.location:com.androidapp.todo.viewHolder////PointingToDeclaration/app/com.androidapp.todo.viewHolder/index.html
+$dokka.location:com.androidapp.todo.viewHolder/TaskViewHolder///PointingToDeclaration/app/com.androidapp.todo.viewHolder/-task-view-holder/index.html
+$dokka.location:com.androidapp.todo.viewHolder/TaskViewHolder/TaskViewHolder/#android.view.View/PointingToDeclaration/app/com.androidapp.todo.viewHolder/-task-view-holder/-task-view-holder.html
+$dokka.location:com.androidapp.todo.viewHolder/TaskViewHolder/colorBg/#/PointingToDeclaration/app/com.androidapp.todo.viewHolder/-task-view-holder/color-bg.html
+$dokka.location:com.androidapp.todo.viewHolder/TaskViewHolder/date/#/PointingToDeclaration/app/com.androidapp.todo.viewHolder/-task-view-holder/date.html
+$dokka.location:com.androidapp.todo.viewHolder/TaskViewHolder/onClick/#android.view.View?/PointingToDeclaration/app/com.androidapp.todo.viewHolder/-task-view-holder/on-click.html
+$dokka.location:com.androidapp.todo.viewHolder/TaskViewHolder/onCreateContextMenu/#android.view.ContextMenu?#android.view.View?#android.view.ContextMenu.ContextMenuInfo?/PointingToDeclaration/app/com.androidapp.todo.viewHolder/-task-view-holder/on-create-context-menu.html
+$dokka.location:com.androidapp.todo.viewHolder/TaskViewHolder/onLongClick/#android.view.View?/PointingToDeclaration/app/com.androidapp.todo.viewHolder/-task-view-holder/on-long-click.html
+$dokka.location:com.androidapp.todo.viewHolder/TaskViewHolder/subtitle/#/PointingToDeclaration/app/com.androidapp.todo.viewHolder/-task-view-holder/subtitle.html
+$dokka.location:com.androidapp.todo.viewHolder/TaskViewHolder/timeRemaining/#/PointingToDeclaration/app/com.androidapp.todo.viewHolder/-task-view-holder/time-remaining.html
+$dokka.location:com.androidapp.todo.viewHolder/TaskViewHolder/title/#/PointingToDeclaration/app/com.androidapp.todo.viewHolder/-task-view-holder/title.html
+com.androidapp.todo.activities
+com.androidapp.todo.adapter
+com.androidapp.todo.dao
+com.androidapp.todo.database
+com.androidapp.todo.entities
+com.androidapp.todo.viewHolder
+
