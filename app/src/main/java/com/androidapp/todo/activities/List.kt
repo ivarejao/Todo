@@ -68,6 +68,7 @@ class List : AppCompatActivity() {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
         }
+
     }
 
     // Obtem os elementos do banco de dados.
