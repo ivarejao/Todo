@@ -1,5 +1,7 @@
 # Todo App
 > Um aplicativo de organização de tarefas para Android
+
+
 ![ping](./app/src/main/res/mipmap-xxxhdpi/custom_launcher_round.png)
 
 
