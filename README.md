@@ -1,16 +1,13 @@
 # Todo App
-> Um aplicativo Android de organização de tarefas
+> Um aplicativo de organização de tarefas para Android
 
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url]
 
-> O aplicativo Todo tem como objetivo tornar a vida do usuário mais organizada proporcionando a ele um aplicativo de fácil visualização 
-> mas ao mesmo tempo com várias features que permitem ao usuário definir tarefas de forma simples e intuitiva. 
-> Além disso possui um design moderno  para tornar o uso do app mais confortável para o usuário.
-
-
-![](../header.png)
+O aplicativo Todo tem como objetivo tornar a vida do usuário mais organizada proporcionando a ele um aplicativo de fácil visualização 
+mas ao mesmo tempo com várias features que permitem ao usuário definir tarefas de forma simples e intuitiva. 
+Além disso possui um design moderno  para tornar o uso do app mais confortável para o usuário.
 
 ## Instalação
 
@@ -39,9 +36,8 @@ Android:
 
 ## Exemplo de uso
 
-Alguns exemplos interessantes e úteis sobre como seu projeto pode ser utilizado. Adicione blocos de códigos e, se necessário, screenshots.
-
-_Para mais exemplos, consulte a [Wiki][wiki]._ 
+- Crie uma tarefa
+![Create Note](./img/createNote.gif)
 
 ## Configuração para Desenvolvimento
 
