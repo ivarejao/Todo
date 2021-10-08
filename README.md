@@ -14,16 +14,26 @@
 
 ## Instalação
 
-[![Android](./img/android.png)]
+Android:
+
 > A instalação se passa em um ambiente Desktop
+
 1. Instale o programa Android Studio;
 2. Crie um projeto a partir do repositório;
+
+
 ![Selecione a opção de criação pelo git](./img/android_studio_get_from_vc.png)
+
+
 ![Preencha com o url do repo e o diretório](./img/android_studio_get_from_vc_2.png)
+
+
 3. Conecte o seu dispositivo Android a seu Desktop;
 3.1 Permita a conexão entre os dispositivos no seu Android;
 4. Selecione o seu dispositivo para o aplicativo executar;
+
 ![Selecione o dispositivo](./img/dispositivos.png)
+
 5. Clique em executar e espere o AndroidStudio relatar sucesso na execução;
 6. Pronto, o aplicativo está instalado.
 
