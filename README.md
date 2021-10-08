@@ -1,9 +1,7 @@
 # Todo App
 > Um aplicativo de organização de tarefas para Android
+![ping](./app/src/main/res/mipmap-xxxhdpi/custom_launcher_round.png)
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
 
 O aplicativo Todo tem como objetivo tornar a vida do usuário mais organizada proporcionando a ele um aplicativo de fácil visualização 
 mas ao mesmo tempo com várias features que permitem ao usuário definir tarefas de forma simples e intuitiva. 
@@ -37,51 +35,33 @@ Android:
 ## Exemplo de uso
 
 - Crie uma tarefa
+
 ![Create Note](./img/createNote.gif)
 
-## Configuração para Desenvolvimento
+- Crie tarefa a partir de texto selecionado e visualize
 
-Descreva como instalar todas as dependências para desenvolvimento e como rodar um test-suite automatizado de algum tipo. Se necessário, faça isso para múltiplas plataformas.
-
-```sh
-make install
-npm test
-```
+![Selected](./img/Selcted.gif)
 
 ## Histórico de lançamentos
 
-* 0.2.1
-    * MUDANÇA: Atualização de docs (código do módulo permanece inalterado)
-* 0.2.0
-    * MUDANÇA: Remove `setDefaultXYZ()`
-    * ADD: Adiciona `init()`
-* 0.1.1
-    * CONSERTADO: Crash quando chama `baz()` (Obrigado @NomeDoContribuidorGeneroso!)
-* 0.1.0
+* 1.0.0
     * O primeiro lançamento adequado
-    * MUDANÇA: Renomeia `foo()` para `bar()`
+* 0.9.1
+    * MUDANÇA: Atualização de docs (código do módulo permanece inalterado)
+* 0.7.0
+    * Consertado: Conserto na criação da nota
+* 0.5.1
+    * CONSERTADO: Crash quando chama `list()` 
+* 0.1.0
+    * Branch `app` criada focada no aplicativo
+    * Branch `database` criada focada no Room database
 * 0.0.1
     * Trabalho em andamento
 
-## Meta
-
-Seu Nome – [@SeuNome](https://twitter.com/...) – SeuEmail@exemplo.com
-
-Distribuído sob a licença XYZ. Veja `LICENSE` para mais informações.
-
-[https://github.com/yourname/github-link](https://github.com/othonalberto/)
-
 ## Contributing
 
-1. Faça o _fork_ do projeto (<https://github.com/yourname/yourproject/fork>)
+1. Faça o _fork_ do projeto (<https://github.com/ivarejao/Todo.git>)
 2. Crie uma _branch_ para sua modificação (`git checkout -b feature/fooBar`)
 3. Faça o _commit_ (`git commit -am 'Add some fooBar'`)
 4. _Push_ (`git push origin feature/fooBar`)
 5. Crie um novo _Pull Request_
-
-[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/datadog-metrics
-[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[wiki]: https://github.com/seunome/seuprojeto/wiki
